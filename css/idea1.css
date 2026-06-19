@@ -141,7 +141,7 @@
 .rr-panel-header h3 {
   margin: 0 0 0.2rem;
   font-size: 1.05rem;
-  color: var(--accent-2);
+  color: var(--accent);
 }
 
 .rr-panel-meta {
@@ -184,7 +184,7 @@
 }
 
 .rr-leg-goalscorer .rr-leg-selection {
-  color: var(--accent);
+  color: var(--text);
 }
 
 .rr-panel-footer {
@@ -195,14 +195,15 @@
 }
 
 .rr-combined-odds {
-  font-size: 1.3rem;
-  font-weight: 700;
-  color: var(--text);
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--muted);
 }
 
 .rr-payout {
-  color: var(--accent-2);
-  font-weight: 600;
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text);
 }
 
 .rr-place-bet-btn {

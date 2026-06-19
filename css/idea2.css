@@ -103,7 +103,7 @@
 
 .gsl-buy-btn {
   background: var(--accent);
-  color: #04231f;
+  color: #ffffff;
   font-weight: 700;
   font-size: 1rem;
   border: none;
@@ -241,7 +241,7 @@
   left: 0;
   top: 0;
   bottom: 0;
-  background: rgba(45, 212, 191, 0.18);
+  background: rgba(255, 0, 0, 0.18);
   z-index: 0;
 }
 

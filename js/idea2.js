@@ -2,59 +2,66 @@
 // All data below is synthetic/illustrative (client-side only, no real ticket
 // sales, payment processing, or results feed), per docs/idea2-epic.md.
 
+import 'flag-icons/css/flag-icons.min.css';
+
+// The confirmed 48-team field for the 2026 FIFA World Cup (Canada/Mexico/USA),
+// across all six confederations. `code` maps to a flag-icons CSS class
+// (e.g. 'dz' -> .fi-dz) — rendered as an actual flag image rather than a
+// Unicode flag emoji, since Windows fonts show those as plain country codes.
 const TEAMS = [
-  'Argentina', 'Australia', 'Austria', 'Belgium', 'Brazil', 'Cameroon',
-  'Canada', 'Chile', 'Colombia', 'Costa Rica', 'Croatia', 'Denmark',
-  'Ecuador', 'Egypt', 'England', 'France', 'Germany', 'Ghana',
-  'Iran', 'Italy', 'Ivory Coast', 'Jamaica', 'Japan', 'Mexico',
-  'Morocco', 'Netherlands', 'New Zealand', 'Nigeria', 'Norway', 'Panama',
-  'Paraguay', 'Peru', 'Poland', 'Portugal', 'Qatar', 'Saudi Arabia',
-  'Scotland', 'Senegal', 'Serbia', 'South Korea', 'Spain', 'Sweden',
-  'Switzerland', 'Tunisia', 'Ukraine', 'United States', 'Uruguay', 'Wales',
+  { name: 'Algeria', code: 'dz' },
+  { name: 'Argentina', code: 'ar' },
+  { name: 'Australia', code: 'au' },
+  { name: 'Austria', code: 'at' },
+  { name: 'Belgium', code: 'be' },
+  { name: 'Bosnia and Herzegovina', code: 'ba' },
+  { name: 'Brazil', code: 'br' },
+  { name: 'Canada', code: 'ca' },
+  { name: 'Cape Verde', code: 'cv' },
+  { name: 'Colombia', code: 'co' },
+  { name: 'Croatia', code: 'hr' },
+  { name: 'Curaçao', code: 'cw' },
+  { name: 'Czech Republic', code: 'cz' },
+  { name: 'DR Congo', code: 'cd' },
+  { name: 'Ecuador', code: 'ec' },
+  { name: 'Egypt', code: 'eg' },
+  { name: 'England', code: 'gb-eng' },
+  { name: 'France', code: 'fr' },
+  { name: 'Germany', code: 'de' },
+  { name: 'Ghana', code: 'gh' },
+  { name: 'Haiti', code: 'ht' },
+  { name: 'Iran', code: 'ir' },
+  { name: 'Iraq', code: 'iq' },
+  { name: 'Ivory Coast', code: 'ci' },
+  { name: 'Japan', code: 'jp' },
+  { name: 'Jordan', code: 'jo' },
+  { name: 'Mexico', code: 'mx' },
+  { name: 'Morocco', code: 'ma' },
+  { name: 'Netherlands', code: 'nl' },
+  { name: 'New Zealand', code: 'nz' },
+  { name: 'Norway', code: 'no' },
+  { name: 'Panama', code: 'pa' },
+  { name: 'Paraguay', code: 'py' },
+  { name: 'Portugal', code: 'pt' },
+  { name: 'Qatar', code: 'qa' },
+  { name: 'Saudi Arabia', code: 'sa' },
+  { name: 'Scotland', code: 'gb-sct' },
+  { name: 'Senegal', code: 'sn' },
+  { name: 'South Africa', code: 'za' },
+  { name: 'South Korea', code: 'kr' },
+  { name: 'Spain', code: 'es' },
+  { name: 'Sweden', code: 'se' },
+  { name: 'Switzerland', code: 'ch' },
+  { name: 'Tunisia', code: 'tn' },
+  { name: 'Turkey', code: 'tr' },
+  { name: 'United States', code: 'us' },
+  { name: 'Uruguay', code: 'uy' },
+  { name: 'Uzbekistan', code: 'uz' },
 ];
 
-// ISO 3166-1 alpha-2 codes, in the same order as TEAMS. England/Scotland/Wales
-// have no ISO code, so they use a special "gb-xxx" marker handled by flagFor().
-const TEAM_CODES = [
-  'ar', 'au', 'at', 'be', 'br', 'cm',
-  'ca', 'cl', 'co', 'cr', 'hr', 'dk',
-  'ec', 'eg', 'gb-eng', 'fr', 'de', 'gh',
-  'ir', 'it', 'ci', 'jm', 'jp', 'mx',
-  'ma', 'nl', 'nz', 'ng', 'no', 'pa',
-  'py', 'pe', 'pl', 'pt', 'qa', 'sa',
-  'gb-sct', 'sn', 'rs', 'kr', 'es', 'se',
-  'ch', 'tn', 'ua', 'us', 'uy', 'gb-wls',
-];
-
-// Builds a flag emoji from an ISO alpha-2 code via regional indicator symbols.
-function flagEmoji(code) {
-  return code
-    .toUpperCase()
-    .split('')
-    .map((c) => String.fromCodePoint(c.codePointAt(0) + 127397))
-    .join('');
+function flagSpan(code) {
+  return `<span class="fi fi-${code} fis gsl-flag"></span>`;
 }
-
-// Builds a subdivision flag (England/Scotland/Wales) from a Unicode tag
-// sequence: black flag + tagged ASCII letters + cancel tag.
-function tagFlag(code) {
-  const TAG_BASE = 0xe0000;
-  const tag = code
-    .toLowerCase()
-    .split('')
-    .map((c) => String.fromCodePoint(TAG_BASE + c.codePointAt(0)))
-    .join('');
-  return '\u{1F3F4}' + tag + '\u{E007F}';
-}
-
-function flagFor(code) {
-  if (code.startsWith('gb-')) {
-    return tagFlag('gb' + code.slice(3));
-  }
-  return flagEmoji(code);
-}
-
-const TEAM_FLAGS = TEAM_CODES.map(flagFor);
 
 const TICKET_PRICE = 2; // £ per ticket
 const OPERATOR_TAKE_RATE = 0.15; // 15% operator take before pari-mutuel split
@@ -149,7 +156,7 @@ function renderYourTickets() {
   }
 
   list.innerHTML = yourTickets
-    .map((teamIdx) => `<li class="gsl-chip"><span class="gsl-ball">${TEAM_FLAGS[teamIdx]}</span>${TEAMS[teamIdx]}</li>`)
+    .map((teamIdx) => `<li class="gsl-chip"><span class="gsl-ball">${TEAMS[teamIdx].flag}</span>${TEAMS[teamIdx].name}</li>`)
     .join('');
 }
 
@@ -158,13 +165,13 @@ function renderPool() {
   if (!container) return;
 
   container.innerHTML = TEAMS.map(
-    (name, idx) => `
+    (team, idx) => `
       <span
         id="gsl-pool-ball-${idx}"
         class="gsl-pool-ball"
-        title="${name}"
+        title="${team.name}"
         style="animation-delay:${(idx * 0.07).toFixed(2)}s"
-      >${TEAM_FLAGS[idx]}</span>`
+      >${team.flag}</span>`
   ).join('');
 }
 
@@ -180,7 +187,7 @@ function renderDistribution() {
   const container = document.getElementById('gsl-dist-list');
   if (!container) return;
 
-  const rows = TEAMS.map((name, idx) => ({ idx, name, count: distribution[idx] }));
+  const rows = TEAMS.map((team, idx) => ({ idx, name: team.name, flag: team.flag, count: distribution[idx] }));
   rows.sort((a, b) => b.count - a.count);
   const max = rows.length ? rows[0].count : 0;
 
@@ -191,7 +198,7 @@ function renderDistribution() {
       return `
         <div class="gsl-dist-row">
           <div class="gsl-dist-bar" style="width:${barPct.toFixed(2)}%"></div>
-          <span class="gsl-dist-ball">${TEAM_FLAGS[row.idx]}</span>
+          <span class="gsl-dist-ball">${row.flag}</span>
           <span class="gsl-dist-name">${row.name}</span>
           <span class="gsl-dist-count">${formatNumber(row.count)}</span>
           <span class="gsl-dist-pct">${pct.toFixed(2)}%</span>

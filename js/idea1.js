@@ -125,11 +125,11 @@ const MATCHES = [
         { label: 'Correct Score 2-1 (Spain)', odds: 8.50 },
       ],
       'Anytime Goalscorer': [
-        { label: 'Álvaro Morata to Score Anytime', odds: 1.85, isGoalscorer: true },
+        { label: 'Lamine Yamal to Score Anytime', odds: 1.85, isGoalscorer: true },
         { label: 'Salem Al-Dawsari to Score Anytime', odds: 3.50, isGoalscorer: true },
       ],
       'First Goalscorer': [
-        { label: 'Álvaro Morata First Goalscorer', odds: 3.75 },
+        { label: 'Lamine Yamal First Goalscorer', odds: 3.75 },
         { label: 'Salem Al-Dawsari First Goalscorer', odds: 7.00 },
       ],
       'Half-Time/Full-Time': [
@@ -383,7 +383,7 @@ function handleGenerate() {
 
   const combos = pickCombos(targetOdds);
 
-  targetEl.textContent = `You need combined odds of ${formatOdds(targetOdds)} — here are the 5 closest soccer bet builder combos.`;
+  targetEl.textContent = `You need combined odds of ${formatOdds(targetOdds)} — here are the 5 closest bet builder combos.`;
   targetEl.hidden = false;
 
   renderResults(combos, targetOdds, have);

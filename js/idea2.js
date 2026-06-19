@@ -66,9 +66,9 @@ function flagSpan(code) {
 const TICKET_PRICE = 2; // £ per ticket
 const OPERATOR_TAKE_RATE = 0.15; // 15% operator take before pari-mutuel split
 const TIERS = [
-  { id: 'champion', name: 'Champion', trigger: "Your team wins the World Cup Final" },
-  { id: 'wooden-spoon', name: 'Wooden Spoon', trigger: 'Your team finishes bottom of the 48-team field' },
-  { id: 'fastest-goal', name: 'Fastest Goal', trigger: "Your team scores the tournament's single fastest goal" },
+  { id: 'champion', name: 'Champion', trigger: "Your team wins the World Cup Final", share: 0.60 },
+  { id: 'wooden-spoon', name: 'Wooden Spoon', trigger: 'Your team finishes bottom of the 48-team field', share: 0.25 },
+  { id: 'fastest-goal', name: 'Fastest Goal', trigger: "Your team scores the tournament's single fastest goal", share: 0.15 },
 ];
 const INITIAL_TICKETS = 1_000_000;
 
@@ -97,11 +97,12 @@ function formatMoney(n) {
 }
 
 // Pari-mutuel pool per tier: total stake revenue, minus operator take,
-// split evenly across the three prize tiers.
-function computeTierPool() {
+// split across the three prize tiers by each tier's share (Champion 60%,
+// Wooden Spoon 25%, Fastest Goal 15%).
+function computeTierPool(tier) {
   const grossRevenue = totalTickets * TICKET_PRICE;
   const afterTake = grossRevenue * (1 - OPERATOR_TAKE_RATE);
-  return afterTake / TIERS.length;
+  return afterTake * tier.share;
 }
 
 function animateTicker(toValue, duration = 1400) {
@@ -133,14 +134,13 @@ function renderTicker() {
 function renderTiers() {
   const container = document.getElementById('gsl-tiers');
   if (!container) return;
-  const pool = computeTierPool();
 
   container.innerHTML = TIERS.map(
     (tier) => `
       <div class="gsl-tier-card">
         <h3>${tier.name}</h3>
         <p class="gsl-tier-trigger">${tier.trigger}</p>
-        <div class="gsl-tier-pool">${formatMoney(pool)}</div>
+        <div class="gsl-tier-pool">${formatMoney(computeTierPool(tier))}</div>
         <p class="gsl-tier-status">Unresolved — pool growing</p>
       </div>`
   ).join('');

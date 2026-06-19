@@ -1,0 +1,199 @@
+.rr-tool {
+  margin: 2rem 0 3rem;
+}
+
+.rr-inputs {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1.5rem;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+}
+
+.rr-box {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.25rem 1.5rem;
+  min-width: 180px;
+}
+
+.rr-box label {
+  display: block;
+  color: var(--muted);
+  font-size: 0.85rem;
+  margin-bottom: 0.5rem;
+}
+
+.rr-money-input {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.rr-currency {
+  color: var(--accent-2);
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.rr-money-input input {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: var(--text);
+  font-size: 1.5rem;
+  font-weight: 700;
+  outline: none;
+}
+
+.rr-arrow {
+  font-size: 1.75rem;
+  color: var(--muted);
+}
+
+.rr-generate-btn {
+  display: block;
+  margin: 0 auto;
+  background: var(--accent);
+  color: #04231f;
+  font-weight: 700;
+  font-size: 1rem;
+  border: none;
+  border-radius: 8px;
+  padding: 0.85rem 2rem;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.rr-generate-btn:hover {
+  opacity: 0.85;
+}
+
+.rr-error {
+  text-align: center;
+  color: #ff6b6b;
+  margin-top: 1rem;
+}
+
+.rr-target {
+  text-align: center;
+  color: var(--muted);
+  margin-top: 1.5rem;
+}
+
+.rr-results {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.25rem;
+  margin-top: 1.5rem;
+}
+
+.rr-panel {
+  background: var(--bg-alt);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.rr-panel-header h3 {
+  margin: 0 0 0.2rem;
+  font-size: 1.05rem;
+  color: var(--accent-2);
+}
+
+.rr-panel-meta {
+  color: var(--muted);
+  font-size: 0.8rem;
+}
+
+.rr-legs {
+  list-style: none;
+  margin: 1rem 0;
+  padding: 0;
+  flex: 1;
+}
+
+.rr-leg {
+  display: flex;
+  justify-content: space-between;
+  gap: 0.5rem;
+  padding: 0.4rem 0;
+  border-bottom: 1px solid var(--border);
+  font-size: 0.85rem;
+}
+
+.rr-leg:last-child {
+  border-bottom: none;
+}
+
+.rr-leg-market {
+  color: var(--muted);
+  flex: 0 0 38%;
+}
+
+.rr-leg-selection {
+  flex: 1;
+}
+
+.rr-leg-odds {
+  color: var(--text);
+  font-weight: 600;
+}
+
+.rr-leg-goalscorer .rr-leg-selection {
+  color: var(--accent);
+}
+
+.rr-panel-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-top: 0.5rem;
+}
+
+.rr-combined-odds {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text);
+}
+
+.rr-payout {
+  color: var(--accent-2);
+  font-weight: 600;
+}
+
+.rr-place-bet-btn {
+  display: block;
+  width: 100%;
+  margin: 0.75rem 0 0;
+  background: var(--accent);
+  color: #04231f;
+  font-weight: 700;
+  font-size: 0.9rem;
+  border: none;
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+}
+
+.rr-place-bet-btn:hover {
+  opacity: 0.85;
+}
+
+.idea-meta {
+  border-top: 1px solid var(--border);
+  padding-top: 1.5rem;
+  color: var(--muted);
+  font-size: 0.9rem;
+}
+
+.idea-meta code {
+  background: var(--bg-alt);
+  padding: 0.1rem 0.4rem;
+  border-radius: 4px;
+}

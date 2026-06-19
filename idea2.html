@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Idea 2 — Sportradar Ideathon</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/idea2.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav">
+      <a href="index.html" class="nav-brand">Sportradar Ideathon</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="idea1.html">Idea 1</a>
+        <a href="idea2.html">Idea 2</a>
+        <a href="idea3.html">Idea 3</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <article class="idea-detail">
+      <h1>Idea 2: Global Sweepstake Lottery</h1>
+      <p class="tagline">Buy a ticket, get randomly assigned 1 of the 48 World Cup teams, and win a share of the pool if your team becomes Champion, Wooden Spoon, or scores the tournament's Fastest Goal.</p>
+
+      <section class="gsl-tool">
+        <div class="gsl-ticker">
+          <span class="gsl-ticker-label">Total tickets sold</span>
+          <span id="gsl-ticker-value" class="gsl-ticker-value">0</span>
+        </div>
+
+        <div class="gsl-pool-wrap">
+          <h2 class="gsl-pool-label">All 48 teams are in the draw</h2>
+          <p class="gsl-dist-hint">Every ticket draws one of these balls completely at random — hover a ball to see its team.</p>
+          <div id="gsl-pool" class="gsl-pool"></div>
+        </div>
+
+        <div class="gsl-buy-row">
+          <button id="gsl-buy" class="gsl-buy-btn" type="button">Buy a ticket — £2</button>
+          <p class="gsl-buy-hint">Each ticket instantly draws 1 of the 48 World Cup teams at random — no scarcity, duplicates allowed.</p>
+        </div>
+
+        <div id="gsl-tiers" class="gsl-tiers"></div>
+
+        <div class="gsl-yours">
+          <h2>Your tickets</h2>
+          <ul id="gsl-yours-list" class="gsl-yours-list">
+            <li class="gsl-empty">You haven't bought a ticket yet.</li>
+          </ul>
+        </div>
+
+        <div class="gsl-distribution">
+          <h2>Live distribution — all 48 teams</h2>
+          <p class="gsl-dist-hint">Simulated draw history across every ticket sold so far, ranked by ticket count.</p>
+          <div id="gsl-dist-list" class="gsl-dist-list"></div>
+        </div>
+      </section>
+
+      <section class="idea-meta">
+        <h2>About this prototype</h2>
+        <p>Demo data only — initialised with 1,000,000 tickets already sold, randomly distributed across 48 illustrative World Cup teams. Pool sizes are calculated client-side (no real ticket sales, payment processing, or results feed). See the full PRD in <code>docs/idea2-epic.md</code> for production scope.</p>
+      </section>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Sportradar Ideathon</p>
+  </footer>
+
+  <script type="module" src="js/script.js"></script>
+  <script type="module" src="js/idea2.js"></script>
+</body>
+</html>

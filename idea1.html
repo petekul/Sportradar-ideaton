@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Idea 1 — Sportradar Ideathon</title>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/idea1.css">
+</head>
+<body>
+  <header class="site-header">
+    <nav class="nav">
+      <a href="index.html" class="nav-brand">Sportradar Ideathon</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="idea1.html">Idea 1</a>
+        <a href="idea2.html">Idea 2</a>
+        <a href="idea3.html">Idea 3</a>
+      </div>
+    </nav>
+  </header>
+
+  <main>
+    <article class="idea-detail">
+      <h1>Idea 1: Reverse Recommendations</h1>
+      <p class="tagline">Choose your odds — we'll line up soccer bet builder combos to match.</p>
+
+      <section class="rr-tool">
+        <div class="rr-inputs">
+          <div class="rr-box">
+            <label for="rr-have">I have</label>
+            <div class="rr-money-input">
+              <span class="rr-currency">£</span>
+              <input type="number" id="rr-have" min="1" step="1" value="10" inputmode="numeric">
+            </div>
+          </div>
+
+          <div class="rr-arrow" aria-hidden="true">&rarr;</div>
+
+          <div class="rr-box">
+            <label for="rr-want">I want</label>
+            <div class="rr-money-input">
+              <span class="rr-currency">£</span>
+              <input type="number" id="rr-want" min="1" step="1" value="100" inputmode="numeric">
+            </div>
+          </div>
+        </div>
+
+        <button id="rr-generate" class="rr-generate-btn" type="button">Generate combos</button>
+
+        <p id="rr-error" class="rr-error" hidden></p>
+        <p id="rr-target" class="rr-target" hidden></p>
+
+        <div id="rr-results" class="rr-results" hidden></div>
+      </section>
+
+      <section class="idea-meta">
+        <h2>About this prototype</h2>
+        <p>Demo data only — 3 fixed World Cup group-stage matches (soccer), with synthetic odds generated client-side. See the full PRD in <code>docs/idea1-epic.md</code> for production scope.</p>
+      </section>
+    </article>
+  </main>
+
+  <footer class="site-footer">
+    <p>&copy; 2026 Sportradar Ideathon</p>
+  </footer>
+
+  <script type="module" src="js/script.js"></script>
+  <script type="module" src="js/idea1.js"></script>
+</body>
+</html>

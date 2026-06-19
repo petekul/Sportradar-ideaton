@@ -156,7 +156,7 @@ function renderYourTickets() {
   }
 
   list.innerHTML = yourTickets
-    .map((teamIdx) => `<li class="gsl-chip"><span class="gsl-ball">${TEAMS[teamIdx].flag}</span>${TEAMS[teamIdx].name}</li>`)
+    .map((teamIdx) => `<li class="gsl-chip"><span class="gsl-ball">${flagSpan(TEAMS[teamIdx].code)}</span>${TEAMS[teamIdx].name}</li>`)
     .join('');
 }
 
@@ -171,7 +171,7 @@ function renderPool() {
         class="gsl-pool-ball"
         title="${team.name}"
         style="animation-delay:${(idx * 0.07).toFixed(2)}s"
-      >${team.flag}</span>`
+      >${flagSpan(team.code)}</span>`
   ).join('');
 }
 
@@ -187,7 +187,7 @@ function renderDistribution() {
   const container = document.getElementById('gsl-dist-list');
   if (!container) return;
 
-  const rows = TEAMS.map((team, idx) => ({ idx, name: team.name, flag: team.flag, count: distribution[idx] }));
+  const rows = TEAMS.map((team, idx) => ({ idx, name: team.name, code: team.code, count: distribution[idx] }));
   rows.sort((a, b) => b.count - a.count);
   const max = rows.length ? rows[0].count : 0;
 
@@ -198,7 +198,7 @@ function renderDistribution() {
       return `
         <div class="gsl-dist-row">
           <div class="gsl-dist-bar" style="width:${barPct.toFixed(2)}%"></div>
-          <span class="gsl-dist-ball">${row.flag}</span>
+          <span class="gsl-dist-ball">${flagSpan(row.code)}</span>
           <span class="gsl-dist-name">${row.name}</span>
           <span class="gsl-dist-count">${formatNumber(row.count)}</span>
           <span class="gsl-dist-pct">${pct.toFixed(2)}%</span>

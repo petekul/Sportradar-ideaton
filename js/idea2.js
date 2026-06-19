@@ -2,115 +2,61 @@
 // All data below is synthetic/illustrative (client-side only, no real ticket
 // sales, payment processing, or results feed), per docs/idea2-epic.md.
 
-// Square (1x1) flag SVGs from the flag-icons package, imported individually
-// (rather than its full CSS, which would bundle all ~200 countries) so Vite
-// only ships the 48 flags this prototype actually needs.
-import flagDz from 'flag-icons/flags/1x1/dz.svg';
-import flagAr from 'flag-icons/flags/1x1/ar.svg';
-import flagAu from 'flag-icons/flags/1x1/au.svg';
-import flagAt from 'flag-icons/flags/1x1/at.svg';
-import flagBe from 'flag-icons/flags/1x1/be.svg';
-import flagBa from 'flag-icons/flags/1x1/ba.svg';
-import flagBr from 'flag-icons/flags/1x1/br.svg';
-import flagCa from 'flag-icons/flags/1x1/ca.svg';
-import flagCv from 'flag-icons/flags/1x1/cv.svg';
-import flagCo from 'flag-icons/flags/1x1/co.svg';
-import flagHr from 'flag-icons/flags/1x1/hr.svg';
-import flagCw from 'flag-icons/flags/1x1/cw.svg';
-import flagCz from 'flag-icons/flags/1x1/cz.svg';
-import flagCd from 'flag-icons/flags/1x1/cd.svg';
-import flagEc from 'flag-icons/flags/1x1/ec.svg';
-import flagEg from 'flag-icons/flags/1x1/eg.svg';
-import flagGbEng from 'flag-icons/flags/1x1/gb-eng.svg';
-import flagFr from 'flag-icons/flags/1x1/fr.svg';
-import flagDe from 'flag-icons/flags/1x1/de.svg';
-import flagGh from 'flag-icons/flags/1x1/gh.svg';
-import flagHt from 'flag-icons/flags/1x1/ht.svg';
-import flagIr from 'flag-icons/flags/1x1/ir.svg';
-import flagIq from 'flag-icons/flags/1x1/iq.svg';
-import flagCi from 'flag-icons/flags/1x1/ci.svg';
-import flagJp from 'flag-icons/flags/1x1/jp.svg';
-import flagJo from 'flag-icons/flags/1x1/jo.svg';
-import flagMx from 'flag-icons/flags/1x1/mx.svg';
-import flagMa from 'flag-icons/flags/1x1/ma.svg';
-import flagNl from 'flag-icons/flags/1x1/nl.svg';
-import flagNz from 'flag-icons/flags/1x1/nz.svg';
-import flagNo from 'flag-icons/flags/1x1/no.svg';
-import flagPa from 'flag-icons/flags/1x1/pa.svg';
-import flagPy from 'flag-icons/flags/1x1/py.svg';
-import flagPt from 'flag-icons/flags/1x1/pt.svg';
-import flagQa from 'flag-icons/flags/1x1/qa.svg';
-import flagSa from 'flag-icons/flags/1x1/sa.svg';
-import flagGbSct from 'flag-icons/flags/1x1/gb-sct.svg';
-import flagSn from 'flag-icons/flags/1x1/sn.svg';
-import flagZa from 'flag-icons/flags/1x1/za.svg';
-import flagKr from 'flag-icons/flags/1x1/kr.svg';
-import flagEs from 'flag-icons/flags/1x1/es.svg';
-import flagSe from 'flag-icons/flags/1x1/se.svg';
-import flagCh from 'flag-icons/flags/1x1/ch.svg';
-import flagTn from 'flag-icons/flags/1x1/tn.svg';
-import flagTr from 'flag-icons/flags/1x1/tr.svg';
-import flagUs from 'flag-icons/flags/1x1/us.svg';
-import flagUy from 'flag-icons/flags/1x1/uy.svg';
-import flagUz from 'flag-icons/flags/1x1/uz.svg';
-
 // The confirmed 48-team field for the 2026 FIFA World Cup (Canada/Mexico/USA),
-// across all six confederations. `flag` is an actual flag image, not a
-// Unicode flag emoji, since Windows fonts render those as plain country codes.
+// across all six confederations. Flags are literal Unicode flag-emoji
+// characters (regional-indicator pairs; England/Scotland use the subdivision
+// tag-sequence form, supported by Apple Color Emoji since iOS 11.1 / macOS
+// High Sierra and rendered identically by every browser on macOS).
 const TEAMS = [
-  { name: 'Algeria', flag: flagDz },
-  { name: 'Argentina', flag: flagAr },
-  { name: 'Australia', flag: flagAu },
-  { name: 'Austria', flag: flagAt },
-  { name: 'Belgium', flag: flagBe },
-  { name: 'Bosnia and Herzegovina', flag: flagBa },
-  { name: 'Brazil', flag: flagBr },
-  { name: 'Canada', flag: flagCa },
-  { name: 'Cape Verde', flag: flagCv },
-  { name: 'Colombia', flag: flagCo },
-  { name: 'Croatia', flag: flagHr },
-  { name: 'Curaçao', flag: flagCw },
-  { name: 'Czech Republic', flag: flagCz },
-  { name: 'DR Congo', flag: flagCd },
-  { name: 'Ecuador', flag: flagEc },
-  { name: 'Egypt', flag: flagEg },
-  { name: 'England', flag: flagGbEng },
-  { name: 'France', flag: flagFr },
-  { name: 'Germany', flag: flagDe },
-  { name: 'Ghana', flag: flagGh },
-  { name: 'Haiti', flag: flagHt },
-  { name: 'Iran', flag: flagIr },
-  { name: 'Iraq', flag: flagIq },
-  { name: 'Ivory Coast', flag: flagCi },
-  { name: 'Japan', flag: flagJp },
-  { name: 'Jordan', flag: flagJo },
-  { name: 'Mexico', flag: flagMx },
-  { name: 'Morocco', flag: flagMa },
-  { name: 'Netherlands', flag: flagNl },
-  { name: 'New Zealand', flag: flagNz },
-  { name: 'Norway', flag: flagNo },
-  { name: 'Panama', flag: flagPa },
-  { name: 'Paraguay', flag: flagPy },
-  { name: 'Portugal', flag: flagPt },
-  { name: 'Qatar', flag: flagQa },
-  { name: 'Saudi Arabia', flag: flagSa },
-  { name: 'Scotland', flag: flagGbSct },
-  { name: 'Senegal', flag: flagSn },
-  { name: 'South Africa', flag: flagZa },
-  { name: 'South Korea', flag: flagKr },
-  { name: 'Spain', flag: flagEs },
-  { name: 'Sweden', flag: flagSe },
-  { name: 'Switzerland', flag: flagCh },
-  { name: 'Tunisia', flag: flagTn },
-  { name: 'Turkey', flag: flagTr },
-  { name: 'United States', flag: flagUs },
-  { name: 'Uruguay', flag: flagUy },
-  { name: 'Uzbekistan', flag: flagUz },
+  { name: 'Algeria', flag: '🇩🇿' },
+  { name: 'Argentina', flag: '🇦🇷' },
+  { name: 'Australia', flag: '🇦🇺' },
+  { name: 'Austria', flag: '🇦🇹' },
+  { name: 'Belgium', flag: '🇧🇪' },
+  { name: 'Bosnia and Herzegovina', flag: '🇧🇦' },
+  { name: 'Brazil', flag: '🇧🇷' },
+  { name: 'Canada', flag: '🇨🇦' },
+  { name: 'Cape Verde', flag: '🇨🇻' },
+  { name: 'Colombia', flag: '🇨🇴' },
+  { name: 'Croatia', flag: '🇭🇷' },
+  { name: 'Curaçao', flag: '🇨🇼' },
+  { name: 'Czech Republic', flag: '🇨🇿' },
+  { name: 'DR Congo', flag: '🇨🇩' },
+  { name: 'Ecuador', flag: '🇪🇨' },
+  { name: 'Egypt', flag: '🇪🇬' },
+  { name: 'England', flag: '🏴󠁧󠁢󠁥󠁮󠁧󠁿' },
+  { name: 'France', flag: '🇫🇷' },
+  { name: 'Germany', flag: '🇩🇪' },
+  { name: 'Ghana', flag: '🇬🇭' },
+  { name: 'Haiti', flag: '🇭🇹' },
+  { name: 'Iran', flag: '🇮🇷' },
+  { name: 'Iraq', flag: '🇮🇶' },
+  { name: 'Ivory Coast', flag: '🇨🇮' },
+  { name: 'Japan', flag: '🇯🇵' },
+  { name: 'Jordan', flag: '🇯🇴' },
+  { name: 'Mexico', flag: '🇲🇽' },
+  { name: 'Morocco', flag: '🇲🇦' },
+  { name: 'Netherlands', flag: '🇳🇱' },
+  { name: 'New Zealand', flag: '🇳🇿' },
+  { name: 'Norway', flag: '🇳🇴' },
+  { name: 'Panama', flag: '🇵🇦' },
+  { name: 'Paraguay', flag: '🇵🇾' },
+  { name: 'Portugal', flag: '🇵🇹' },
+  { name: 'Qatar', flag: '🇶🇦' },
+  { name: 'Saudi Arabia', flag: '🇸🇦' },
+  { name: 'Scotland', flag: '🏴󠁧󠁢󠁳󠁣󠁴󠁿' },
+  { name: 'Senegal', flag: '🇸🇳' },
+  { name: 'South Africa', flag: '🇿🇦' },
+  { name: 'South Korea', flag: '🇰🇷' },
+  { name: 'Spain', flag: '🇪🇸' },
+  { name: 'Sweden', flag: '🇸🇪' },
+  { name: 'Switzerland', flag: '🇨🇭' },
+  { name: 'Tunisia', flag: '🇹🇳' },
+  { name: 'Turkey', flag: '🇹🇷' },
+  { name: 'United States', flag: '🇺🇸' },
+  { name: 'Uruguay', flag: '🇺🇾' },
+  { name: 'Uzbekistan', flag: '🇺🇿' },
 ];
-
-function flagSpan(url) {
-  return `<span class="gsl-flag" style="background-image:url('${url}')"></span>`;
-}
 
 const TICKET_PRICE = 2; // £ per ticket
 const OPERATOR_TAKE_RATE = 0.15; // 15% operator take before pari-mutuel split

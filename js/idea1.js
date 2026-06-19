@@ -292,33 +292,84 @@ function renderResults(combos, targetOdds, stake) {
   });
 }
 
+const WANT_DEFAULTS = { gbp: '100', odds: '10.00' };
+
+let wantMode = 'gbp';
+
+function setWantMode(mode) {
+  wantMode = mode;
+
+  const gbpWrap = document.getElementById('rr-want-gbp-wrap');
+  const oddsWrap = document.getElementById('rr-want-odds-wrap');
+  const label = document.getElementById('rr-want-label');
+  const gbpBtn = document.querySelector('.rr-mode-btn[data-mode="gbp"]');
+  const oddsBtn = document.querySelector('.rr-mode-btn[data-mode="odds"]');
+
+  gbpWrap.hidden = mode !== 'gbp';
+  oddsWrap.hidden = mode !== 'odds';
+  label.textContent = mode === 'gbp' ? 'Target value' : 'Target odds';
+  gbpBtn.classList.toggle('active', mode === 'gbp');
+  gbpBtn.setAttribute('aria-pressed', mode === 'gbp');
+  oddsBtn.classList.toggle('active', mode === 'odds');
+  oddsBtn.setAttribute('aria-pressed', mode === 'odds');
+
+  if (mode === 'gbp') {
+    document.getElementById('rr-want').value = WANT_DEFAULTS.gbp;
+  } else {
+    document.getElementById('rr-want-odds').value = WANT_DEFAULTS.odds;
+  }
+}
+
 function handleGenerate() {
   const haveInput = document.getElementById('rr-have');
   const wantInput = document.getElementById('rr-want');
+  const wantOddsInput = document.getElementById('rr-want-odds');
   const errorEl = document.getElementById('rr-error');
   const targetEl = document.getElementById('rr-target');
   const resultsEl = document.getElementById('rr-results');
 
   const have = Number(haveInput.value);
-  const want = Number(wantInput.value);
 
   errorEl.hidden = true;
   targetEl.hidden = true;
   resultsEl.hidden = true;
 
-  if (!have || !want || have <= 0 || want <= 0) {
-    errorEl.textContent = 'Enter a stake and target amount greater than £0.';
-    errorEl.hidden = false;
-    return;
+  let targetOdds;
+
+  if (wantMode === 'gbp') {
+    const want = Number(wantInput.value);
+
+    if (!have || !want || have <= 0 || want <= 0) {
+      errorEl.textContent = 'Enter a stake and target amount greater than £0.';
+      errorEl.hidden = false;
+      return;
+    }
+
+    if (want <= have) {
+      errorEl.textContent = '"Target value" must be greater than "I have".';
+      errorEl.hidden = false;
+      return;
+    }
+
+    targetOdds = want / have;
+  } else {
+    const oddsValue = Number(wantOddsInput.value);
+
+    if (!have || have <= 0) {
+      errorEl.textContent = 'Enter a stake greater than £0.';
+      errorEl.hidden = false;
+      return;
+    }
+
+    if (!oddsValue || oddsValue < 1.01 || oddsValue > 1000) {
+      errorEl.textContent = 'Enter target odds between 1.01 and 1000.';
+      errorEl.hidden = false;
+      return;
+    }
+
+    targetOdds = oddsValue;
   }
 
-  if (want <= have) {
-    errorEl.textContent = '"I want" must be greater than "I have".';
-    errorEl.hidden = false;
-    return;
-  }
-
-  const targetOdds = want / have;
   const combos = pickCombos(targetOdds);
 
   targetEl.textContent = `You need combined odds of ${formatOdds(targetOdds)} — here are the 5 closest soccer bet builder combos.`;
@@ -333,4 +384,8 @@ document.addEventListener('DOMContentLoaded', () => {
   if (button) {
     button.addEventListener('click', handleGenerate);
   }
+
+  document.querySelectorAll('.rr-mode-btn').forEach((btn) => {
+    btn.addEventListener('click', () => setWantMode(btn.dataset.mode));
+  });
 });

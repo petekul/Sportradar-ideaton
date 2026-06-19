@@ -162,7 +162,7 @@ function renderYourTickets() {
     .map(
       ([teamIdx, count]) => `
         <li class="gsl-chip">
-          <span class="gsl-ball">${flagSpan(TEAMS[teamIdx].flag)}</span>
+          <span class="gsl-ball">${TEAMS[teamIdx].flag}</span>
           ${TEAMS[teamIdx].name}
           ${count > 1 ? `<span class="gsl-chip-count">×${count}</span>` : ''}
         </li>`
@@ -181,7 +181,7 @@ function renderPool() {
         class="gsl-pool-ball"
         title="${team.name}"
         style="animation-delay:${(idx * 0.07).toFixed(2)}s"
-      >${flagSpan(team.flag)}</span>`
+      >${team.flag}</span>`
   ).join('');
 }
 
@@ -208,7 +208,7 @@ function renderDistribution() {
       return `
         <div class="gsl-dist-row">
           <div class="gsl-dist-bar" style="width:${barPct.toFixed(2)}%"></div>
-          <span class="gsl-dist-ball">${flagSpan(row.flag)}</span>
+          <span class="gsl-dist-ball">${row.flag}</span>
           <span class="gsl-dist-name">${row.name}</span>
           <span class="gsl-dist-count">${formatNumber(row.count)}</span>
           <span class="gsl-dist-pct">${pct.toFixed(2)}%</span>

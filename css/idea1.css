@@ -66,6 +66,10 @@
   gap: 0.4rem;
 }
 
+.rr-money-input[hidden] {
+  display: none;
+}
+
 .rr-currency {
   color: var(--accent-2);
   font-weight: 700;

@@ -1,15 +1,14 @@
 # Sportradar Ideathon
 
-Vite-powered static site for showcasing three ideathon prototypes. Plain HTML/CSS/JS pages, bundled by Vite for fast local dev and a production-ready build.
+Vite-powered static site for showcasing two ideathon prototypes. Plain HTML/CSS/JS pages, bundled by Vite for fast local dev and a production-ready build.
 
 ## Structure
 
 ```
 sportradar ideathon/
-├── index.html              Landing page, links to all three ideas
+├── index.html              Landing page, links to both ideas
 ├── idea1.html               Idea 1 detail page
 ├── idea2.html               Idea 2 detail page
-├── idea3.html               Idea 3 detail page
 ├── css/
 │   └── style.css            Shared styling
 ├── js/
@@ -30,7 +29,7 @@ npm install
 npm run dev
 ```
 
-Opens a dev server with hot reload. Visit the printed local URL, and navigate to `/idea1.html`, `/idea2.html`, `/idea3.html` directly or via the nav bar.
+Opens a dev server with hot reload. Visit the printed local URL, and navigate to `/idea1.html`, `/idea2.html` directly or via the nav bar.
 
 ## Building
 

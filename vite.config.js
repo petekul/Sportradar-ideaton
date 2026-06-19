@@ -11,7 +11,6 @@ export default defineConfig({
         main: resolve(process.cwd(), 'index.html'),
         idea1: resolve(process.cwd(), 'idea1.html'),
         idea2: resolve(process.cwd(), 'idea2.html'),
-        idea3: resolve(process.cwd(), 'idea3.html'),
       },
     },
   },

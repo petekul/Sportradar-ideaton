@@ -184,6 +184,16 @@
   align-items: center;
 }
 
+.gsl-chip-count {
+  margin-left: 0.5rem;
+  background: var(--accent);
+  color: #ffffff;
+  font-weight: 700;
+  font-size: 0.75rem;
+  padding: 0.1rem 0.5rem;
+  border-radius: 999px;
+}
+
 .gsl-ball {
   display: inline-flex;
   align-items: center;
@@ -259,6 +269,14 @@
   font-size: 1.05rem;
   overflow: hidden;
   font-weight: 700;
+}
+
+.gsl-flag {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: center;
 }
 
 .gsl-dist-name {

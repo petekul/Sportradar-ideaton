@@ -43,7 +43,7 @@
         <div id="gsl-tiers" class="gsl-tiers"></div>
 
         <div class="gsl-yours">
-          <h2>Your tickets</h2>
+          <h2>Your tickets <span id="gsl-yours-spent" class="gsl-yours-spent">£0 spent</span></h2>
           <ul id="gsl-yours-list" class="gsl-yours-list">
             <li class="gsl-empty">You haven't bought a ticket yet.</li>
           </ul>
@@ -56,16 +56,8 @@
         </div>
       </section>
 
-      <section class="idea-meta">
-        <h2>About this prototype</h2>
-        <p>Demo data only — initialised with 1,000,000 tickets already sold, randomly distributed across 48 illustrative World Cup teams. Pool sizes are calculated client-side (no real ticket sales, payment processing, or results feed). See the full PRD in <code>docs/idea2-epic.md</code> for production scope.</p>
-      </section>
     </article>
   </main>
-
-  <footer class="site-footer">
-    <p>&copy; 2026 Sportradar Ideathon</p>
-  </footer>
 
   <script type="module" src="js/script.js"></script>
   <script type="module" src="js/idea2.js"></script>

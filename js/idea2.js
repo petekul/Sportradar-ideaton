@@ -184,19 +184,24 @@ function renderTiers() {
   const container = document.getElementById('gsl-tiers');
   if (!container) return;
 
-  container.innerHTML = TIERS.map(
-    (tier) => `
+  container.innerHTML = TIERS.map((tier) => {
+    const pool = computeTierPool(tier);
+    const ticketsPerTeam = totalTickets / TEAMS.length;
+    const payoutPerTicket = ticketsPerTeam ? pool / ticketsPerTeam : 0;
+    return `
       <div class="gsl-tier-card">
         <h3>${tier.name}</h3>
         <p class="gsl-tier-trigger">${tier.trigger}</p>
-        <div class="gsl-tier-pool">${formatMoney(computeTierPool(tier))}</div>
-        <p class="gsl-tier-status">Unresolved — pool growing</p>
-      </div>`
-  ).join('');
+        <div class="gsl-tier-pool">${formatMoney(pool)}</div>
+        <p class="gsl-tier-status">${formatMoney(payoutPerTicket)} per ticket if your team wins</p>
+      </div>`;
+  }).join('');
 }
 
 function renderYourTickets() {
   const list = document.getElementById('gsl-yours-list');
+  const spentEl = document.getElementById('gsl-yours-spent');
+  if (spentEl) spentEl.textContent = `${formatMoney(yourTickets.length * TICKET_PRICE)} spent`;
   if (!list) return;
 
   if (yourTickets.length === 0) {

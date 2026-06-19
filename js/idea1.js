@@ -157,6 +157,7 @@ const TOTAL_RESULTS = 5;
 const CANDIDATES_PER_MATCH = 400;
 const MIN_LEGS = 2;
 const MAX_LEGS = 4;
+const CONFLICTING_MARKETS = ['First Goalscorer', 'Anytime Goalscorer']; // never both in the same combo
 
 function randomInt(min, max) {
   return Math.floor(Math.random() * (max - min + 1)) + min;
@@ -177,7 +178,17 @@ function shuffle(arr) {
 
 // Build one random same-game combo for a given match.
 function buildCandidate(match) {
-  const marketNames = shuffle(Object.keys(match.markets));
+  let marketNames = shuffle(Object.keys(match.markets));
+
+  const conflictIndexes = CONFLICTING_MARKETS
+    .map((name) => marketNames.indexOf(name))
+    .filter((index) => index !== -1);
+
+  if (conflictIndexes.length > 1) {
+    const dropIndex = pickRandom(conflictIndexes);
+    marketNames = marketNames.filter((_, index) => index !== dropIndex);
+  }
+
   const legCount = randomInt(MIN_LEGS, MAX_LEGS);
   const chosenMarkets = marketNames.slice(0, legCount);
 

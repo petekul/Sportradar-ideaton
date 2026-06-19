@@ -38,10 +38,18 @@
           <div class="rr-arrow" aria-hidden="true">&rarr;</div>
 
           <div class="rr-box">
-            <label for="rr-want">I want</label>
-            <div class="rr-money-input">
+            <label id="rr-want-label" for="rr-want">Target value</label>
+            <div class="rr-mode-toggle">
+              <button type="button" class="rr-mode-btn active" data-mode="gbp">£</button>
+              <button type="button" class="rr-mode-btn" data-mode="odds">Odds</button>
+            </div>
+            <div class="rr-money-input" id="rr-want-gbp-wrap">
               <span class="rr-currency">£</span>
               <input type="number" id="rr-want" min="1" step="1" value="100" inputmode="numeric">
+            </div>
+            <div class="rr-money-input" id="rr-want-odds-wrap" hidden>
+              <input type="number" id="rr-want-odds" min="1.01" max="1000" step="0.01" value="10.00" inputmode="decimal">
+              <span class="rr-odds-suffix">x</span>
             </div>
           </div>
         </div>
